@@ -14,21 +14,17 @@ public class Player : MonoBehaviour
 	public float runSpeed = 10f;
 	public float strafeSpeed = 5f;
 	public float rotationalSpeed = 5f;
-	
 	//Camera stuff
 	public float cameraRotation;
 	public float tiltSpeed = 5f;
 	public float maxTiltAngle = 45f;
-	
 	// Raycast stuff
 	public Transform playerCamera;
 	public float maxFiringDistance = 100f;
-	
 	//Objectives
 	public int fishScore = 0;
 	public Text fishText;
 	
-
 #region UnityEvents
 
 	private void Awake()
@@ -52,33 +48,25 @@ public class Player : MonoBehaviour
 	
 #endregion
 
-#region Movement
-	
-	public void Move()
+ #region Movement
+ public void Move()
 	{
-		
 		float currentSpeed = IsRunning()
 			? runSpeed
 			: walkSpeed;
 		float forwardSpeed = ForwardDirection() * currentSpeed;
 		Vector3 movementDirection = (transform.forward * forwardSpeed) + (transform.right * SidewaysDirection() * strafeSpeed);
 		characterController.Move(movementDirection * Time.deltaTime);
-		
 		//Camera rotation
 		transform.rotation *= Quaternion.Euler(0, RotationY() * rotationalSpeed, 0);
 		cameraRotation += TiltCamera() * tiltSpeed;
 		cameraRotation = Mathf.Clamp(cameraRotation, -maxTiltAngle, maxTiltAngle);
 		playerCamera.transform.localRotation = Quaternion.Euler(cameraRotation, 0, 0);
-		
-		
 	}
-	
-	public float onScreenUpValue;
+ public float onScreenUpValue;
 	public float onScreenDownValue;
 	public float onScreenLeftValue;
 	public float onScreenRightValue;
-	
-
 	private float OnScreenHorizontal
 	{
 		get { return onScreenRightValue - onScreenLeftValue; }
@@ -143,11 +131,8 @@ public class Player : MonoBehaviour
 
 #endregion
 
-#region Fishing
-
-	
-
-	private bool FireRay(out RaycastHit hit)
+#region Fishing Controls
+private bool FireRay(out RaycastHit hit)
 	{
 		Debug.DrawRay(playerCamera.transform.position,playerCamera.transform.forward*maxFiringDistance,Color.red,1f);
 		if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out hit, maxFiringDistance))
@@ -157,8 +142,7 @@ public class Player : MonoBehaviour
 		return false;
 
 	}
-	
-	void FireRod()
+void FireRod()
 	{
 		RaycastHit hit;
 		if(!FireRay(out hit))
@@ -176,6 +160,8 @@ public class Player : MonoBehaviour
 	}
 	
 #endregion
+
+
 
 #region Score Keeping
 

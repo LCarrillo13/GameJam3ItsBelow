@@ -23,9 +23,16 @@ public class Menu : MonoBehaviour
 		}
 	}
 
+	public void ChangeScene2()
+	{
+		SceneManager.LoadScene("SampleScene");
+	}
+	
 	public void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
 	}
 }
+
+
