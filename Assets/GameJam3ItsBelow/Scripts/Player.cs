@@ -142,6 +142,10 @@ private bool FireRay(out RaycastHit hit)
 		return false;
 
 	}
+
+	/// <summary>
+	/// Fires a rod and checks if it hits a fish. If it does, the fish is disabled and the player's score is increased.
+	/// </summary>
 void FireRod()
 	{
 		RaycastHit hit;
