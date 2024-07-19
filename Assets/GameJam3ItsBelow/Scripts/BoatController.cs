@@ -17,26 +17,13 @@ public class BoatController : MonoBehaviour
     [SerializeField]
     public GameObject captainsSpot;
     public Transform originalPos;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
+    
     public void ToggleBoat()
     {
         originalPos = player.transform;
         player.transform.position = captainsSpot.transform.position;
        
-        
+        ToggleSteering();
         Debug.Log("Boat Toggled");
     }
 
